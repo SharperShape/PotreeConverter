@@ -240,11 +240,15 @@ PotreeArguments parseArguments(int argc, char **argv){
 	}
 
    try {
-    auto absolutePath = fs::canonical(fs::system_complete(argv[0]));
-    a.executablePath = absolutePath.parent_path().string();
-   } catch (const fs::filesystem_error &e) {
-     // do nothing
-   }
+#ifdef __APPLE__
+		auto absolutePath = fs::canonical(fs::absolute(argv[0]));
+#else
+		auto absolutePath = fs::canonical(fs::system_complete(argv[0]));
+#endif
+		a.executablePath = absolutePath.parent_path().string();
+   	} catch (const fs::filesystem_error &e) {
+    	// do nothing
+   	}
 
 	return a;
 }

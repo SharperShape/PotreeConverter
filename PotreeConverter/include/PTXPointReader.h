@@ -2,6 +2,9 @@
 #define PTXPOINTREADER_H
 
 #include <map>
+#ifdef __APPLE__
+#include <vector>
+#endif
 #include "PointReader.h"
 
 using std::string;
