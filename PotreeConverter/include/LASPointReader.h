@@ -113,7 +113,10 @@ public:
 
         Point p = transform(coordinates[0], coordinates[1], coordinates[2]);
         p.intensity = point->intensity;
-        p.classification = point->extended_classification;
+        if (header->point_data_format < 6)
+            p.classification = point->extended_classification;
+        else
+            p.classification = point->classification;
 
         p.color.x = point->rgb[0] / colorScale;
         p.color.y = point->rgb[1] / colorScale;
