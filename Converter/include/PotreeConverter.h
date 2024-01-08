@@ -83,7 +83,7 @@ inline vector<Attribute> parseExtraAttributes(LasHeader& header) {
 	vector<Attribute> attributes;
 
 	for (auto& vlr : header.vlrs) {
-		if (vlr.recordID == 4) {
+		if (strcmp(vlr.userID, "LASF_Spec") == 0 && vlr.recordID == 4) {
 			auto extraData = vlr.data;
 
 			constexpr int recordSize = 192;
