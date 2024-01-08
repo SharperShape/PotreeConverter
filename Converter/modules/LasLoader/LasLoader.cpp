@@ -110,6 +110,7 @@ LasHeader loadLasHeader(string path) {
 
 		VLR vlr;
 
+		memcpy(vlr.userID, laszip_vlr.user_id, 16);
 		vlr.recordID = laszip_vlr.record_id;
 		vlr.recordLengthAfterHeader = laszip_vlr.record_length_after_header;
 		vlr.data.resize(vlr.recordLengthAfterHeader);
